@@ -1,2 +1,3 @@
 # to-do-list
-[ #STUDYING | #JAVASCRIPTFULLSTACK ] - Project developed through the FULL STACK JAVSCRIPT training
+* #STUDYING - #JAVASCRIPTFULLSTACK - #TAILWINDCSS
+* Project developed through the FULL STACK JAVSCRIPT training
