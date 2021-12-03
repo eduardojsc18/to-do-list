@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] { display: none !important; }
+
+@layer components {
+
+    .animate-ease-in-out {
+        @apply transition-all duration-300 ease-in-out
+    }
+
+}
