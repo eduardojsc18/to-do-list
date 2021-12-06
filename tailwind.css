@@ -10,4 +10,8 @@
         @apply transition-all duration-300 ease-in-out
     }
 
+    .delay-show-important {
+        animation-delay: 500ms !important;
+    }
+
 }

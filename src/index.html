@@ -18,97 +18,77 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 
 </head>
-<body class="bg-gradient-to-tl to-gray-100 from-gray-300 font-roboto h-screen flex flex-col overflow-hidden">
+<body class="bg-gradient-to-tl to-gray-50 from-gray-200 font-roboto min-h-screen flex flex-col overflow-hidden">
 
-    <div class="flex-grow flex items-center container mx-auto px-3">
-        <div class="md:w-2/5 mx-auto"
-             x-data="{showAnimate: false}"
-             x-intersect:enter="showAnimate = true"
-            >
+    <div class="flex-grow flex items-center container mx-auto px-3 pt-20 lg:pt-0 ">
+        <div class="w-full lg:w-3/5 xl:w-2/5 mx-auto" >
 
-            <header class="-z-1 flex items-center pb-2 relative">
+            <!-- HEADER -->
+            <header id="header" class="-z-1 pb-2 relative opacity-0 animate-showHeader delay-show-important">
+                <div class="flex items-center">
 
-                <img class="w-24 absolute right-3 md:right-5 -top-14" src="assets/img/doings.png" alt=""
-                     x-show="showAnimate"
-                     x-cloak="hidden"
-                     x-transition:enter="transition-all ease-in-out duration-500 delay-500"
-                     x-transition:enter-start="opacity-0 transform translate-y-1/2"
-                     x-transition:enter-end="opacity-100 transform translate-y-0"
-                    >
+                    <img class="w-20 lg:w-24 absolute right-3 md:right-5 -top-7 lg:-top-9" src="assets/img/daily-tasks.png" alt="" >
 
-                <h1 class="tracking-wider text-xl md:text-2xl font-extrabold pl-3 md:pl-5 text-gray-800"
-                    x-show="showAnimate"
-                    x-cloak="hidden"
-                    x-transition:enter="transition-all ease-in-out duration-500 delay-700"
-                    x-transition:enter-start="opacity-0 transform translate-y-full"
-                    x-transition:enter-end="opacity-100 transform translate-y-0"
-                    >
+                    <h1 class="tracking-wider text-lg md:text-2xl font-extrabold pl-3 md:pl-5 text-gray-800">
+                        Lista de Tarefas
+                    </h1>
 
-                    Lista de Tarefas
-
-                </h1>
-
+                </div>
             </header>
 
-            <main class="bg-white shadow hover:shadow-md rounded-lg transition pt-5 overflow-hidden"
-                 x-show="showAnimate"
-                 x-cloak="hidden"
-                 x-transition:enter="transition-all ease-in-out duration-500"
-                 x-transition:enter-start="opacity-0 transform translate-y-full"
-                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                >
+            <!-- INPUT TO DO LIST -->
+            <main class="animate-showMain z-999">
 
-                <section class="max-h-96 ">
-
+                <!-- EMPTY TO DO -->
+                <section id="emptyList" class=" bg-white shadow hover:shadow-md rounded-lg transition pt-5 overflow-hidden">
+                    <div class="border-4 border-gray-300 border-dashed rounded-lg px-3 py-10 text-center text-gray-400 mx-5 mb-5 space-y-5">
+                        <p class="text-5xl">☹</p>
+                        <p class="text-2xl">Nenhuma tarefa inserida...</p>
+                    </div>
                 </section>
 
-                <section class="border-4 border-gray-300 border-dashed rounded-lg px-3 py-10 text-center text-gray-400 mx-5 mb-5">
-                    <p class="text-5xl">☹</p>
-                    <p class="text-2xl">Nenhuma tarefa inserida...</p>
-                </section>
+                <!-- TO DO -->
+                <section class="bg-white shadow hover:shadow-md rounded-xl transition overflow-hidden">
+                    <div class="max-h-96 overflow-x-hidden overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-white scrollbar">
+                        <ul class="grid divide-y-2 divide-dashed" id="list" >
 
-                <section x-data="{colorAddToDO: false}"
-                     class="bg-gray-100 border-t border-transparent relative transition"
-                    :class="{'bg-white border-green-500 bg-white': colorAddToDO}"
-                    >
-                    <form action="">
-                        <label for="add-to-do">
-
-                            <span class="absolute left-5 top-6 text-gray-500"
-                                :class="{'text-green-500': colorAddToDO}"
-                                >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current transition" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-
-                            <input id="add-to-do"
-                                class="pl-14 pr-5 py-6 text-xl text-gray-800 w-full outline-none bg-transparent focus:outline-none"
-                                type="search"
-                                placeholder="Digite sua tarefa e pressione ENTER"
-                                @focusin="colorAddToDO = true" @focusout="colorAddToDO = false"
-                                >
-
-                        </label>
-                    </form>
+                        </ul>
+                    </div>
                 </section>
 
             </main>
 
+            <!-- INPUT ADD TO DO LIST -->
+            <div id="input" class="z-0 bg-gray-50 rounded-3xl border-2 border-transparent relative transition mt-5 shadow hover:shadow-md overflow-hidden opacity-0 animate-showInput delay-show-important "
+                x-data="{colorAddToDO: false}"
+                :class="{'bg-white border-green-400 bg-white': colorAddToDO}"
+                >
+                <label for="inputTask">
+
+                    <span class="absolute left-5 top-6 text-gray-500"
+                        :class="{'text-green-500': colorAddToDO}"
+                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current transition" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+
+                    <input id="inputTask"
+                        class="pl-14 pr-3 lg:pr-5 py-6 lg:text-xl text-gray-800 w-full outline-none"
+                        type="search"
+                        :placeholder="window.innerWidth >= 1024 ? 'Digite sua tarefa e pressione ENTER' : 'Digite sua tarefa e pressione Ok' "
+                           placeholder=""
+                        @focusin="colorAddToDO = true" @focusout="colorAddToDO = false"
+                        >
+
+                </label>
+            </div>
+
         </div>
     </div>
 
-    <footer class="z-50 px-3"
-        x-data="{showAnimate: false}"
-        x-intersect:enter="showAnimate = true"
-        >
-        <div class="container mx-auto px-3 py-5 text-gray-800 space-y-3 relative group"
-             x-show="showAnimate"
-             x-cloak="hidden"
-             x-transition:enter="transition-all ease-in-out duration-500 delay-1000"
-             x-transition:enter-start="opacity-0 transform translate-y-1/2"
-             x-transition:enter-end="opacity-100 transform translate-y-0"
-            >
+    <footer class="z-50 px-3 pt-20">
+        <div class="container mx-auto px-3 py-5 text-gray-800 space-y-3 relative group">
 
             <div class="flex items-center justify-center gap-3">
                 <a href="https://www.linkedin.com/in/eduardojsc/" title="LinkedIn - Eduardo José">
@@ -134,6 +114,19 @@
 
     <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+    <script>
+
+        setTimeout(function (){
+            document.querySelector('#header').classList.remove('opacity-0')
+            document.querySelector('#input').classList.remove('opacity-0')
+        }, 499)
+
+    </script>
+
+
+    <script src="assets/js/main.js"></script>
 
 </body>
 </html>
