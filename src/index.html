@@ -104,8 +104,8 @@
 
                     <input id="inputTask"
                         class="pl-14 pr-3 lg:pr-5 py-6 lg:text-xl text-gray-800 w-full outline-none"
-                        type="search"
-                        :placeholder="window.innerWidth >= 1024 ? 'Digite sua tarefa e pressione ENTER' : 'Digite sua tarefa e pressione Ok' "
+                        :type="window.innerWidth >= 1024 ? 'search' : 'text' "
+                        :placeholder="window.innerWidth >= 1024 ? 'Digite sua tarefa e pressione ENTER' : 'Digite sua tarefa' "
                         placeholder=""
                         @focusin="colorAddToDO = true" @focusout="colorAddToDO = false"
                         >
