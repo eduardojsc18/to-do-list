@@ -1,3 +1,5 @@
+window.emptyListShow = 0
+
 const Main = {
 
     init: function (){
@@ -66,7 +68,11 @@ const Main = {
                 document.querySelector("#input").classList.add('border-green-400')
                 document.querySelector("#input").classList.remove('border-red-500')
 
-                self.$emptyList.classList.add('hidden')
+                emptyListShow++
+
+                if (emptyListShow > 0) {
+                    self.$emptyList.classList.add('hidden')
+                }
 
                 self.$list.innerHTML += `
                     <li class="z-0 px-5 relative flex items-center justify-between text-gray-400 hover:text-gray-800 transform animate-ease-in-out animate-showToDo"
@@ -119,6 +125,19 @@ const Main = {
             setTimeout(function (){
                 toDo.classList.add('hidden')
             }, 300)
+
+            emptyListShow--
+
+            if(emptyListShow === 0){
+                setTimeout(function (){
+                    Main.$emptyList.classList.remove('hidden')
+                    Main.$emptyList.classList.add('opacity-0')
+                }, 300)
+                setTimeout(function (){
+                    Main.$emptyList.classList.add('opacity-100')
+                }, 500)
+
+            }
 
             Main.cacheSelector()
             Main.bindEvents()
